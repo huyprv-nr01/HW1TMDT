@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Nguyễn Long Huy, an E-commerce student focused on Supply Chain and Logistics." />
+  <meta name="theme-color" content="#0B3D1E" />
+  <title>Nguyễn Long Huy | E-commerce &amp; Supply Chain Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { heineken: { green: '#008200', forest: '#0B3D1E', light: '#E8F5EC', red: '#E2231A', silver: '#D9DEE3', ink: '#1F2937', slate: '#F8FAFC' } },
+      fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+      boxShadow: { soft: '0 12px 36px rgba(11, 61, 30, 0.08)' }
+    } } };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    :focus-visible { outline: 3px solid #E2231A; outline-offset: 4px; }
+    .nav-link[aria-current='page'] { color: #008200; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .timeline-line::before { content: ''; position: absolute; left: .45rem; top: .35rem; bottom: .25rem; width: 2px; background: #D9DEE3; }
+    .skill-pill { display: inline-flex; border-radius: 9999px; background: #E8F5EC; padding: .5rem .75rem; font-size: .75rem; font-weight: 600; color: #0B3D1E; }
+    /* Ảnh campus của hai trường đại học */
+    #about .mt-10.grid.gap-5 > article::before { content: ''; display: block; height: 12rem; margin: -1.5rem -1.5rem 1.5rem; border-radius: .75rem; background-position: center; background-size: cover; }
+    #about .mt-10.grid.gap-5 > article:nth-child(1)::before { background-image: url('https://www.ueh.edu.vn/images/upload/editer/20250121050949_Co%20so%20A%20chao%20xuan%20at%20ty_4.jpg'); }
+    #about .mt-10.grid.gap-5 > article:nth-child(2)::before { background-image: url('https://user-cdn.uef.edu.vn/newsimg/hinhanh/2025/co-so-vat-chat-tiennghi/diachi-moi.jpg'); }
+    @media (min-width: 640px) { #about .mt-10.grid.gap-5 > article::before { margin: -2rem -2rem 1.5rem; } }
+    @media (min-width: 640px) { .skill-pill { font-size: .8125rem; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body class="bg-white text-heineken-ink antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-heineken-forest focus:shadow-soft">Skip to content</a>
+  <header id="top" class="fixed inset-x-0 top-0 z-50 border-b border-white/70 bg-white/90 shadow-sm backdrop-blur-md">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8" aria-label="Main navigation">
+      <a href="#top" class="text-lg font-extrabold tracking-tight text-heineken-forest" aria-label="Long Huy, back to top">Long Huy<span class="text-heineken-green">.</span></a>
+      <button id="menu-button" class="inline-flex h-11 w-11 items-center justify-center rounded-xl text-heineken-forest hover:bg-heineken-light md:hidden" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links"><i data-lucide="menu" aria-hidden="true"></i></button>
+      <div id="nav-links" class="absolute left-0 right-0 top-full hidden border-b border-heineken-silver bg-white px-5 pb-4 pt-2 shadow-md md:static md:flex md:items-center md:gap-7 md:border-0 md:bg-transparent md:p-0 md:shadow-none">
+        <a class="nav-link block rounded-lg px-3 py-3 text-sm font-semibold hover:text-heineken-green md:px-0 md:py-2" href="#about">About</a>
+        <a class="nav-link block rounded-lg px-3 py-3 text-sm font-semibold hover:text-heineken-green md:px-0 md:py-2" href="#experience">Experience</a>
+        <a class="nav-link block rounded-lg px-3 py-3 text-sm font-semibold hover:text-heineken-green md:px-0 md:py-2" href="#project">Project</a>
+        <a class="nav-link block rounded-lg px-3 py-3 text-sm font-semibold hover:text-heineken-green md:px-0 md:py-2" href="#skills">Skills</a>
+        <a class="nav-link block rounded-lg px-3 py-3 text-sm font-semibold hover:text-heineken-green md:px-0 md:py-2" href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="relative overflow-hidden bg-gradient-to-br from-heineken-forest via-[#07552A] to-heineken-green pt-28 text-white sm:pt-32" aria-labelledby="hero-title">
+      <div class="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full border border-white/10" aria-hidden="true"></div>
+      <div class="mx-auto max-w-7xl px-5 pb-16 pt-10 sm:px-8 sm:pb-24 lg:py-24">
+        <div class="reveal max-w-4xl">
+          <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold tracking-wide sm:text-sm"><span class="h-2 w-2 rounded-full bg-[#A8E6B5]" aria-hidden="true"></span>Graduating Apr 2027 <span class="text-white/60">|</span> Supply Chain &amp; Logistics</p>
+          <h1 id="hero-title" class="max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">NGUYỄN LONG HUY</h1>
+          <p class="mt-5 max-w-2xl text-lg font-semibold leading-relaxed text-white/90 sm:text-xl">Graduating E-commerce Student at UEH <span class="text-white/55">|</span> Prior degree in International Business (Foreign Trade)</p>
+          <p class="mt-5 max-w-2xl leading-7 text-white/80">From comparing freight quotations at IMAP Logistics to running an end-to-end e-commerce project, I enjoy turning data and careful follow-up into smooth deliveries and satisfied customers.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#project" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-heineken-forest shadow-sm transition hover:-translate-y-0.5 hover:bg-heineken-light">View my project <i data-lucide="arrow-down-right" class="h-4 w-4" aria-hidden="true"></i></a>
+            <a href="#contact" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/60 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/10">Get in touch <i data-lucide="send" class="h-4 w-4" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="scroll-mt-20 bg-white py-16 sm:py-24" aria-labelledby="about-title">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="reveal max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">About &amp; Education</p><h2 id="about-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Learning the flow behind every order<span class="text-heineken-red">.</span></h2><p class="mt-5 leading-7 text-slate-600">Graduating E-commerce student (expected April 2027) who also holds a degree in International Business (Foreign Trade). Detail-oriented and comfortable with numbers, with experience in freight cost comparison, delivery follow-up and market research, plus project experience in order tracking and inventory records.</p></div>
+        <div class="mt-10 grid gap-5 lg:grid-cols-2">
+          <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-6 shadow-soft transition hover:-translate-y-1 sm:p-8"><div class="flex items-start gap-4"><div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="graduation-cap" aria-hidden="true"></i></div><div><p class="text-sm font-bold text-heineken-green">Oct 2024 – Expected Apr 2027</p><h3 class="mt-2 text-lg font-extrabold text-heineken-forest">University of Economics Ho Chi Minh City (UEH)</h3><p class="mt-1 font-semibold text-slate-700">Bachelor of E-commerce (2nd Degree)</p><p class="mt-3 text-sm font-semibold">GPA: 8.32/10</p><p class="mt-3 text-sm leading-6 text-slate-600"><strong class="text-heineken-ink">Key Coursework:</strong> Global Supply Chain Management, Business Analysis, Management Information Systems, E-commerce Project Management.</p></div></div></article>
+          <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-6 shadow-soft transition hover:-translate-y-1 sm:p-8"><div class="flex items-start gap-4"><div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="book-open-check" aria-hidden="true"></i></div><div><p class="text-sm font-bold text-heineken-green">Sep 2021 – Jul 2024</p><h3 class="mt-2 text-lg font-extrabold text-heineken-forest">University of Economics and Finance (UEF)</h3><p class="mt-1 font-semibold text-slate-700">Bachelor of International Business, Major in Foreign Trade</p><p class="mt-3 text-sm font-semibold">GPA: 8.41/10</p><p class="mt-3 text-sm leading-6 text-slate-600"><strong class="text-heineken-ink">Key Coursework:</strong> Logistics Management, Global Procurement Management, International Transport &amp; Insurance, Operations Management, International Trade Operations.</p></div></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="scroll-mt-20 bg-heineken-slate py-16 sm:py-24" aria-labelledby="experience-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Experience</p><h2 id="experience-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Operations experience<span class="text-heineken-red">.</span></h2></div>
+      <div class="relative mt-10 pl-8 timeline-line"><article class="reveal relative rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8"><span class="absolute -left-[2.05rem] top-8 h-4 w-4 rounded-full border-4 border-heineken-slate bg-heineken-red" aria-hidden="true"></span><div class="flex flex-col gap-5 sm:flex-row sm:items-start"><div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="truck" aria-hidden="true"></i></div><div class="min-w-0"><p class="text-sm font-bold text-heineken-green">Apr 2024 – Jul 2024</p><h3 class="mt-1 text-xl font-extrabold text-heineken-forest">Business Development Intern</h3><p class="mt-1 font-semibold text-slate-600">IMAP Logistics</p><ul class="mt-5 space-y-3 text-sm leading-6 text-slate-600"><li class="flex gap-3"><i data-lucide="check" class="mt-1 h-4 w-4 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Coordinated with cross-functional departments to follow up on delivery timelines and resolve customs and compliance issues, supporting smooth end-to-end order operations.</span></li><li class="flex gap-3"><i data-lucide="check" class="mt-1 h-4 w-4 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Analyzed and compared freight quotations from multiple shipping lines on rates, transit time, surcharges, and routes, consolidating results in Excel to balance cost and delivery time.</span></li><li class="flex gap-3"><i data-lucide="check" class="mt-1 h-4 w-4 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Worked with the sales team to track the customer journey manually, as the department had no CRM system.</span></li><li class="flex gap-3"><i data-lucide="check" class="mt-1 h-4 w-4 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Researched e-commerce markets and customer demand across Asia to support product assortment and cross-border logistics decisions.</span></li></ul></div></div><!-- Có thể thay icon Lucide bằng ảnh nếu muốn thêm hình đại diện công ty. --></article></div>
+    </div></section>
+
+    <section id="project" class="scroll-mt-20 bg-white py-16 sm:py-24" aria-labelledby="project-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal mb-8 max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Featured Project</p><h2 id="project-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Built around the customer order<span class="text-heineken-red">.</span></h2></div>
+      <article class="reveal overflow-hidden rounded-3xl bg-gradient-to-br from-heineken-forest to-[#07552A] text-white shadow-soft"><div class="grid lg:grid-cols-[.85fr_1.15fr]"><div class="flex min-h-64 flex-col justify-between bg-white/5 p-7 sm:p-10"><div><span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold"><i data-lucide="shopping-bag" class="h-4 w-4" aria-hidden="true"></i>University Course Project</span><h3 class="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">Homiecandle</h3><p class="mt-2 text-white/80">B2C E-commerce Platform</p><p class="mt-4 text-sm font-semibold text-white/75">Sep 2025 – Sep 2026 <span class="text-white/40">|</span> E-commerce Project Owner</p></div><div class="mt-8 flex flex-wrap gap-2" aria-label="Project tools"><span class="rounded-full border border-white/25 px-3 py-1.5 text-xs font-semibold">WordPress</span><span class="rounded-full border border-white/25 px-3 py-1.5 text-xs font-semibold">WooCommerce</span></div></div>
+        <div class="bg-white p-7 text-heineken-ink sm:p-10"><h4 class="text-sm font-extrabold uppercase tracking-[.15em] text-heineken-green">Project highlights</h4><ul class="mt-5 space-y-4 text-sm leading-6 text-slate-600"><li class="flex gap-3"><i data-lucide="check-circle-2" class="mt-1 h-5 w-5 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Managed an end-to-end B2C e-commerce simulation, from product selection and pricing to checkout setup and order processing.</span></li><li class="flex gap-3"><i data-lucide="check-circle-2" class="mt-1 h-5 w-5 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Built and maintained a multi-SKU product catalog, keeping product, price, and stock records accurate and consistent across all active SKUs.</span></li><li class="flex gap-3"><i data-lucide="check-circle-2" class="mt-1 h-5 w-5 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Tracked orders from checkout to fulfillment and configured automated tax and shipping rules, ensuring accurate order records and pricing documentation.</span></li><li class="flex gap-3"><i data-lucide="check-circle-2" class="mt-1 h-5 w-5 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Designed tiered product bundles to consolidate orders and reduce per-unit logistics cost.</span></li></ul>
+          <!-- Thay URL này nếu đường dẫn dự án thay đổi. --><a href="https://homiecandle.id.vn/wp/" target="_blank" rel="noopener noreferrer" class="mt-7 inline-flex min-h-11 items-center gap-2 rounded-xl bg-heineken-green px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-heineken-forest">Visit project <i data-lucide="external-link" class="h-4 w-4" aria-hidden="true"></i></a>
+        </div></div></article>
+    </div></section>
+
+    <section id="skills" class="scroll-mt-20 bg-heineken-slate py-16 sm:py-24" aria-labelledby="skills-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Skills</p><h2 id="skills-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Tools and strengths<span class="text-heineken-red">.</span></h2></div>
+      <div class="mt-9 grid gap-5 lg:grid-cols-3">
+        <article class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-7"><div class="flex items-center gap-3"><div class="flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="package-check" aria-hidden="true"></i></div><h3 class="font-extrabold text-heineken-forest">Supply Chain &amp; Logistics</h3></div><div class="mt-5 flex flex-wrap gap-2"><span class="skill-pill">Order Tracking &amp; Follow-up</span><span class="skill-pill">Inventory Management</span><span class="skill-pill">Order Fulfillment</span><span class="skill-pill">Freight Cost Comparison</span><span class="skill-pill">Documentation &amp; Record-keeping</span></div></article>
+        <article class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-7"><div class="flex items-center gap-3"><div class="flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="bar-chart-3" aria-hidden="true"></i></div><h3 class="font-extrabold text-heineken-forest">Analytics &amp; Tools</h3></div><div class="mt-5 flex flex-wrap gap-2"><span class="skill-pill">Microsoft Excel (Proficient)</span><span class="skill-pill">PowerPoint</span><span class="skill-pill">Word</span><span class="skill-pill">Market Research</span><span class="skill-pill">WordPress/WooCommerce</span></div></article>
+        <article class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-7"><div class="flex items-center gap-3"><div class="flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="messages-square" aria-hidden="true"></i></div><h3 class="font-extrabold text-heineken-forest">Soft Skills &amp; Languages</h3></div><div class="mt-5 flex flex-wrap gap-2"><span class="skill-pill">Cross-functional Coordination</span><span class="skill-pill">Attention to Detail</span><span class="skill-pill">Communication</span><span class="skill-pill">Deadline-driven</span><span class="skill-pill">English (Fluent)</span><span class="skill-pill">TOEIC 925 (Listening &amp; Reading)</span></div></article>
+      </div>
+    </div></section>
+
+    <section id="contact" class="scroll-mt-20 bg-white py-16 sm:py-24" aria-labelledby="contact-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal mx-auto max-w-3xl text-center"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Contact</p><h2 id="contact-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Let’s connect<span class="text-heineken-red">.</span></h2><p class="mt-4 leading-7 text-slate-600">I’m happy to connect about opportunities and work in e-commerce, Supply Chain, and Logistics.</p></div>
+      <div class="mt-9 grid gap-4 sm:grid-cols-3">
+        <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-5 text-center shadow-soft"><div class="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="map-pin" aria-hidden="true"></i></div><h3 class="mt-3 text-sm font-extrabold text-heineken-forest">Address</h3><p class="mt-1 text-sm text-slate-600">Ho Chi Minh City, Vietnam</p></article>
+        <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-5 text-center shadow-soft"><div class="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="phone" aria-hidden="true"></i></div><h3 class="mt-3 text-sm font-extrabold text-heineken-forest">Phone</h3><a href="tel:+84911385538" class="mt-1 inline-block text-sm text-slate-600 hover:text-heineken-green">(+84) 911 385 538</a></article>
+        <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-5 text-center shadow-soft"><div class="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="mail" aria-hidden="true"></i></div><h3 class="mt-3 text-sm font-extrabold text-heineken-forest">Email</h3><a href="mailto:huyprv@gmail.com" class="mt-1 inline-block text-sm text-slate-600 hover:text-heineken-green">huyprv@gmail.com</a></article>
+      </div>
+      <div class="reveal mt-8 flex flex-col justify-center gap-3 sm:flex-row"><a href="mailto:huyprv@gmail.com" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-heineken-green px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-heineken-forest"><i data-lucide="send" class="h-4 w-4" aria-hidden="true"></i>Send me an email</a><!-- Đặt file NguyenLongHuy_CV.pdf cùng thư mục với index.html. --><a href="./NguyenLongHuy_CV.pdf" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-heineken-green bg-white px-6 py-3 text-sm font-bold text-heineken-green transition hover:-translate-y-0.5 hover:bg-heineken-light"><i data-lucide="file-down" class="h-4 w-4" aria-hidden="true"></i>Download CV</a></div>
+    </div></section>
+  </main>
+  <footer class="bg-heineken-forest py-7 text-white"><div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 text-sm sm:flex-row sm:px-8"><p class="text-white/80">© 2026 Nguyễn Long Huy</p><a href="#top" class="inline-flex items-center gap-2 rounded-lg px-3 py-2 font-semibold hover:bg-white/10 focus-visible:outline-white">Back to top <i data-lucide="arrow-up" class="h-4 w-4" aria-hidden="true"></i></a></div></footer>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+    const menuButton = document.getElementById('menu-button');
+    const navLinks = document.getElementById('nav-links');
+    const mobileQuery = window.matchMedia('(max-width: 767px)');
+    function closeMenu() {
+      navLinks.classList.add('hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open navigation menu');
+      menuButton.innerHTML = '<i data-lucide="menu" aria-hidden="true"></i>';
+      lucide.createIcons();
+    }
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      navLinks.classList.toggle('hidden', isOpen);
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+      menuButton.innerHTML = isOpen ? '<i data-lucide="menu" aria-hidden="true"></i>' : '<i data-lucide="x" aria-hidden="true"></i>';
+      lucide.createIcons();
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { if (mobileQuery.matches) closeMenu(); }));
+    window.addEventListener('resize', () => {
+      if (!mobileQuery.matches) { navLinks.classList.remove('hidden'); menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Open navigation menu'); }
+      else closeMenu();
+    });
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const revealObserver = new IntersectionObserver((entries, observer) => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+      revealItems.forEach(item => revealObserver.observe(item));
+    } else revealItems.forEach(item => item.classList.add('is-visible'));
+    const sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.getAttribute('href') === '#' + entry.target.id) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    }), { rootMargin: '-30% 0px -60% 0px' });
+    document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
+  </script>
+</body>
+</html>
