@@ -26,16 +26,32 @@
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
     .timeline-line::before { content: ''; position: absolute; left: .45rem; top: .35rem; bottom: .25rem; width: 2px; background: #D9DEE3; }
     .skill-pill { display: inline-flex; border-radius: 9999px; background: #E8F5EC; padding: .5rem .75rem; font-size: .75rem; font-weight: 600; color: #0B3D1E; }
+    #cat-layer { position: fixed; inset: 0; z-index: 35; overflow: hidden; pointer-events: none; }
+    .main-coon { position: absolute; display: grid; place-items: center; pointer-events: auto; cursor: pointer; border: 0; padding: 0; background: transparent; filter: drop-shadow(0 8px 8px rgba(11,61,30,.16)); opacity: .78; transform-origin: center; touch-action: manipulation; }
+    .main-coon svg { width: 100%; height: 100%; overflow: visible; }
+    .main-coon:hover, .main-coon:focus-visible { opacity: 1; filter: drop-shadow(0 10px 14px rgba(11,61,30,.25)); }
+    .main-coon.is-hit { animation: cat-pop .55s ease forwards; pointer-events: none; }
+    .cat-particle { position: fixed; z-index: 40; pointer-events: none; font-size: 1rem; animation: paw-burst .85s cubic-bezier(.2,.8,.2,1) forwards; }
+    .cat-toy { position: fixed; z-index: 41; pointer-events: none; font-size: 1.5rem; animation: toy-drop 1.05s ease-out forwards; }
+    @keyframes cat-pop { 0% { opacity: .8; transform: scale(1) rotate(0); } 35% { transform: scale(1.25) rotate(-8deg); } 100% { opacity: 0; transform: scale(.1) rotate(24deg); } }
+    @keyframes paw-burst { 0% { opacity: 1; transform: translate(-50%,-50%) scale(.5) rotate(0); } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1) rotate(var(--rot)); } }
+    @keyframes toy-drop { 0% { opacity: 0; transform: translate(-50%,-80%) scale(.4) rotate(-20deg); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + 100px)) scale(1) rotate(25deg); } }
     /* Ảnh campus của hai trường đại học */
     #about .mt-10.grid.gap-5 > article::before { content: ''; display: block; height: 12rem; margin: -1.5rem -1.5rem 1.5rem; border-radius: .75rem; background-position: center; background-size: cover; }
     #about .mt-10.grid.gap-5 > article:nth-child(1)::before { background-image: url('https://www.ueh.edu.vn/images/upload/editer/20250121050949_Co%20so%20A%20chao%20xuan%20at%20ty_4.jpg'); }
     #about .mt-10.grid.gap-5 > article:nth-child(2)::before { background-image: url('https://user-cdn.uef.edu.vn/newsimg/hinhanh/2025/co-so-vat-chat-tiennghi/diachi-moi.jpg'); }
     @media (min-width: 640px) { #about .mt-10.grid.gap-5 > article::before { margin: -2rem -2rem 1.5rem; } }
     @media (min-width: 640px) { .skill-pill { font-size: .8125rem; } }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } .reveal { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .cat-particle { animation-duration: .45s !important; }
+      .cat-toy { animation-duration: 1.1s !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body class="bg-white text-heineken-ink antialiased">
+  <div id="cat-layer" aria-hidden="true"></div>
   <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-heineken-forest focus:shadow-soft">Skip to content</a>
   <header id="top" class="fixed inset-x-0 top-0 z-50 border-b border-white/70 bg-white/90 shadow-sm backdrop-blur-md">
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8" aria-label="Main navigation">
@@ -70,7 +86,7 @@
 
     <section id="about" class="scroll-mt-20 bg-white py-16 sm:py-24" aria-labelledby="about-title">
       <div class="mx-auto max-w-7xl px-5 sm:px-8">
-        <div class="reveal max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">About &amp; Education</p><h2 id="about-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Learning the flow behind every order<span class="text-heineken-red">.</span></h2><p class="mt-5 leading-7 text-slate-600">Graduating E-commerce student (expected April 2027) who also holds a degree in International Business (Foreign Trade). Detail-oriented and comfortable with numbers, with experience in freight cost comparison, delivery follow-up and market research, plus project experience in order tracking and inventory records.</p></div>
+        <div class="reveal max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">About &amp; Education</p><h2 id="about-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Learning the flow behind every order</h2><p class="mt-5 leading-7 text-slate-600">Graduating E-commerce student (expected April 2027) who also holds a degree in International Business (Foreign Trade). Detail-oriented and comfortable with numbers, with experience in freight cost comparison, delivery follow-up and market research, plus project experience in order tracking and inventory records.</p></div>
         <div class="mt-10 grid gap-5 lg:grid-cols-2">
           <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-6 shadow-soft transition hover:-translate-y-1 sm:p-8"><div class="flex items-start gap-4"><div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="graduation-cap" aria-hidden="true"></i></div><div><p class="text-sm font-bold text-heineken-green">Oct 2024 – Expected Apr 2027</p><h3 class="mt-2 text-lg font-extrabold text-heineken-forest">University of Economics Ho Chi Minh City (UEH)</h3><p class="mt-1 font-semibold text-slate-700">Bachelor of E-commerce (2nd Degree)</p><p class="mt-3 text-sm font-semibold">GPA: 8.32/10</p><p class="mt-3 text-sm leading-6 text-slate-600"><strong class="text-heineken-ink">Key Coursework:</strong> Global Supply Chain Management, Business Analysis, Management Information Systems, E-commerce Project Management.</p></div></div></article>
           <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-6 shadow-soft transition hover:-translate-y-1 sm:p-8"><div class="flex items-start gap-4"><div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="book-open-check" aria-hidden="true"></i></div><div><p class="text-sm font-bold text-heineken-green">Sep 2021 – Jul 2024</p><h3 class="mt-2 text-lg font-extrabold text-heineken-forest">University of Economics and Finance (UEF)</h3><p class="mt-1 font-semibold text-slate-700">Bachelor of International Business, Major in Foreign Trade</p><p class="mt-3 text-sm font-semibold">GPA: 8.41/10</p><p class="mt-3 text-sm leading-6 text-slate-600"><strong class="text-heineken-ink">Key Coursework:</strong> Logistics Management, Global Procurement Management, International Transport &amp; Insurance, Operations Management, International Trade Operations.</p></div></div></article>
@@ -78,18 +94,18 @@
       </div>
     </section>
 
-    <section id="experience" class="scroll-mt-20 bg-heineken-slate py-16 sm:py-24" aria-labelledby="experience-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Experience</p><h2 id="experience-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Operations experience<span class="text-heineken-red">.</span></h2></div>
+    <section id="experience" class="scroll-mt-20 bg-heineken-slate py-16 sm:py-24" aria-labelledby="experience-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Experience</p><h2 id="experience-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Operations experience</h2></div>
       <div class="relative mt-10 pl-8 timeline-line"><article class="reveal relative rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-8"><span class="absolute -left-[2.05rem] top-8 h-4 w-4 rounded-full border-4 border-heineken-slate bg-heineken-red" aria-hidden="true"></span><div class="flex flex-col gap-5 sm:flex-row sm:items-start"><div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="truck" aria-hidden="true"></i></div><div class="min-w-0"><p class="text-sm font-bold text-heineken-green">Apr 2024 – Jul 2024</p><h3 class="mt-1 text-xl font-extrabold text-heineken-forest">Business Development Intern</h3><p class="mt-1 font-semibold text-slate-600">IMAP Logistics</p><ul class="mt-5 space-y-3 text-sm leading-6 text-slate-600"><li class="flex gap-3"><i data-lucide="check" class="mt-1 h-4 w-4 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Coordinated with cross-functional departments to follow up on delivery timelines and resolve customs and compliance issues, supporting smooth end-to-end order operations.</span></li><li class="flex gap-3"><i data-lucide="check" class="mt-1 h-4 w-4 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Analyzed and compared freight quotations from multiple shipping lines on rates, transit time, surcharges, and routes, consolidating results in Excel to balance cost and delivery time.</span></li><li class="flex gap-3"><i data-lucide="check" class="mt-1 h-4 w-4 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Worked with the sales team to track the customer journey manually, as the department had no CRM system.</span></li><li class="flex gap-3"><i data-lucide="check" class="mt-1 h-4 w-4 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Researched e-commerce markets and customer demand across Asia to support product assortment and cross-border logistics decisions.</span></li></ul></div></div><!-- Có thể thay icon Lucide bằng ảnh nếu muốn thêm hình đại diện công ty. --></article></div>
     </div></section>
 
-    <section id="project" class="scroll-mt-20 bg-white py-16 sm:py-24" aria-labelledby="project-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal mb-8 max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Featured Project</p><h2 id="project-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Built around the customer order<span class="text-heineken-red">.</span></h2></div>
+    <section id="project" class="scroll-mt-20 bg-white py-16 sm:py-24" aria-labelledby="project-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal mb-8 max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Featured Project</p><h2 id="project-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Built around the customer order</h2></div>
       <article class="reveal overflow-hidden rounded-3xl bg-gradient-to-br from-heineken-forest to-[#07552A] text-white shadow-soft"><div class="grid lg:grid-cols-[.85fr_1.15fr]"><div class="flex min-h-64 flex-col justify-between bg-white/5 p-7 sm:p-10"><div><span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold"><i data-lucide="shopping-bag" class="h-4 w-4" aria-hidden="true"></i>University Course Project</span><h3 class="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">Homiecandle</h3><p class="mt-2 text-white/80">B2C E-commerce Platform</p><p class="mt-4 text-sm font-semibold text-white/75">Sep 2025 – Sep 2026 <span class="text-white/40">|</span> E-commerce Project Owner</p></div><div class="mt-8 flex flex-wrap gap-2" aria-label="Project tools"><span class="rounded-full border border-white/25 px-3 py-1.5 text-xs font-semibold">WordPress</span><span class="rounded-full border border-white/25 px-3 py-1.5 text-xs font-semibold">WooCommerce</span></div></div>
         <div class="bg-white p-7 text-heineken-ink sm:p-10"><h4 class="text-sm font-extrabold uppercase tracking-[.15em] text-heineken-green">Project highlights</h4><ul class="mt-5 space-y-4 text-sm leading-6 text-slate-600"><li class="flex gap-3"><i data-lucide="check-circle-2" class="mt-1 h-5 w-5 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Managed an end-to-end B2C e-commerce simulation, from product selection and pricing to checkout setup and order processing.</span></li><li class="flex gap-3"><i data-lucide="check-circle-2" class="mt-1 h-5 w-5 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Built and maintained a multi-SKU product catalog, keeping product, price, and stock records accurate and consistent across all active SKUs.</span></li><li class="flex gap-3"><i data-lucide="check-circle-2" class="mt-1 h-5 w-5 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Tracked orders from checkout to fulfillment and configured automated tax and shipping rules, ensuring accurate order records and pricing documentation.</span></li><li class="flex gap-3"><i data-lucide="check-circle-2" class="mt-1 h-5 w-5 shrink-0 text-heineken-green" aria-hidden="true"></i><span>Designed tiered product bundles to consolidate orders and reduce per-unit logistics cost.</span></li></ul>
           <!-- Thay URL này nếu đường dẫn dự án thay đổi. --><a href="https://homiecandle.id.vn/wp/" target="_blank" rel="noopener noreferrer" class="mt-7 inline-flex min-h-11 items-center gap-2 rounded-xl bg-heineken-green px-5 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-heineken-forest">Visit project <i data-lucide="external-link" class="h-4 w-4" aria-hidden="true"></i></a>
         </div></div></article>
     </div></section>
 
-    <section id="skills" class="scroll-mt-20 bg-heineken-slate py-16 sm:py-24" aria-labelledby="skills-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Skills</p><h2 id="skills-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Tools and strengths<span class="text-heineken-red">.</span></h2></div>
+    <section id="skills" class="scroll-mt-20 bg-heineken-slate py-16 sm:py-24" aria-labelledby="skills-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal max-w-3xl"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Skills</p><h2 id="skills-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Tools and strengths</h2></div>
       <div class="mt-9 grid gap-5 lg:grid-cols-3">
         <article class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-7"><div class="flex items-center gap-3"><div class="flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="package-check" aria-hidden="true"></i></div><h3 class="font-extrabold text-heineken-forest">Supply Chain &amp; Logistics</h3></div><div class="mt-5 flex flex-wrap gap-2"><span class="skill-pill">Order Tracking &amp; Follow-up</span><span class="skill-pill">Inventory Management</span><span class="skill-pill">Order Fulfillment</span><span class="skill-pill">Freight Cost Comparison</span><span class="skill-pill">Documentation &amp; Record-keeping</span></div></article>
         <article class="reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-soft sm:p-7"><div class="flex items-center gap-3"><div class="flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="bar-chart-3" aria-hidden="true"></i></div><h3 class="font-extrabold text-heineken-forest">Analytics &amp; Tools</h3></div><div class="mt-5 flex flex-wrap gap-2"><span class="skill-pill">Microsoft Excel (Proficient)</span><span class="skill-pill">PowerPoint</span><span class="skill-pill">Word</span><span class="skill-pill">Market Research</span><span class="skill-pill">WordPress/WooCommerce</span></div></article>
@@ -97,7 +113,7 @@
       </div>
     </div></section>
 
-    <section id="contact" class="scroll-mt-20 bg-white py-16 sm:py-24" aria-labelledby="contact-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal mx-auto max-w-3xl text-center"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Contact</p><h2 id="contact-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Let’s connect<span class="text-heineken-red">.</span></h2><p class="mt-4 leading-7 text-slate-600">I’m happy to connect about opportunities and work in e-commerce, Supply Chain, and Logistics.</p></div>
+    <section id="contact" class="scroll-mt-20 bg-white py-16 sm:py-24" aria-labelledby="contact-title"><div class="mx-auto max-w-7xl px-5 sm:px-8"><div class="reveal mx-auto max-w-3xl text-center"><p class="text-sm font-bold uppercase tracking-[.18em] text-heineken-green">Contact</p><h2 id="contact-title" class="mt-3 text-3xl font-extrabold tracking-tight text-heineken-forest sm:text-4xl">Let’s connect</h2><p class="mt-4 leading-7 text-slate-600">I’m happy to connect about opportunities and work in e-commerce, Supply Chain, and Logistics.</p></div>
       <div class="mt-9 grid gap-4 sm:grid-cols-3">
         <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-5 text-center shadow-soft"><div class="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="map-pin" aria-hidden="true"></i></div><h3 class="mt-3 text-sm font-extrabold text-heineken-forest">Address</h3><p class="mt-1 text-sm text-slate-600">Ho Chi Minh City, Vietnam</p></article>
         <article class="reveal rounded-2xl border border-slate-200 bg-heineken-slate p-5 text-center shadow-soft"><div class="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-heineken-light text-heineken-green"><i data-lucide="phone" aria-hidden="true"></i></div><h3 class="mt-3 text-sm font-extrabold text-heineken-forest">Phone</h3><a href="tel:+84911385538" class="mt-1 inline-block text-sm text-slate-600 hover:text-heineken-green">(+84) 911 385 538</a></article>
@@ -145,6 +161,198 @@
       });
     }), { rootMargin: '-30% 0px -60% 0px' });
     document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
+
+    // Main Coon interaction layer: SVG/DOM only, so no extra asset file is required.
+    (() => {
+      const layer = document.getElementById('cat-layer');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!layer) return;
+
+      const cats = [];
+      const count = window.innerWidth < 640 ? 5 : 8;
+      const colors = [
+        ['#8B6F5A', '#D8B99B'],
+        ['#4C5960', '#AEBCC2'],
+        ['#B77B52', '#E3B58E'],
+        ['#6D625B', '#C8B9AB']
+      ];
+      const bodyShapes = [
+        '<path d="M36 86c-1-25 14-42 38-42s40 17 39 42c-1 19-17 30-39 30S37 105 36 86Z" fill="BODY"/><path d="M36 91c-28 8-29 36-6 41 12 7 28-1 38-12" fill="none" stroke="BODY" stroke-width="13" stroke-linecap="round"/>',
+        '<path d="M28 87c0-22 19-37 49-37s47 14 51 37c4 22-15 35-48 35S28 112 28 87Z" fill="BODY"/><path d="M99 94c29-5 40 13 24 28-11 9-26 6-38-3" fill="none" stroke="BODY" stroke-width="12" stroke-linecap="round"/>',
+        '<path d="M40 91c3-25 19-40 36-40s32 15 35 40l19 25H91l-15-16-16 16H21Z" fill="BODY"/><path d="M108 91c31-18 43 5 24 19" fill="none" stroke="BODY" stroke-width="11" stroke-linecap="round"/>',
+        '<ellipse cx="75" cy="86" rx="42" ry="34" fill="BODY"/><path d="M43 91c-25 3-29 27-11 35 14 6 26-2 35-12" fill="none" stroke="BODY" stroke-width="12" stroke-linecap="round"/>'
+      ];
+
+      function catSvg(variant, index) {
+        const [body, light] = colors[variant];
+        const id = `cat-gradient-${index}-${Date.now()}`;
+        return `<svg viewBox="0 0 150 145" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${light}"/><stop offset="1" stop-color="${body}"/></linearGradient></defs>
+          ${bodyShapes[variant].replaceAll('BODY', `url(#${id})`)}
+          <path d="M39 47 29 13l27 19c6-3 13-5 20-5s14 2 20 5l27-19-10 34c5 8 7 18 5 29-4 21-21 31-42 31S38 97 34 76c-2-11 0-21 5-29Z" fill="url(#${id})"/>
+          <path d="M35 42 31 23l17 13M115 42l4-19-17 13" fill="none" stroke="#5A4034" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M55 63h1m38 0h1" stroke="#23352C" stroke-width="7" stroke-linecap="round"/>
+          <path d="M68 77c5 5 10 5 15 0" fill="none" stroke="#6D4038" stroke-width="3" stroke-linecap="round"/>
+          <path d="M37 76 12 70m27 15-27 3m89-12 28-6m-30 21 28 3" stroke="#6D625B" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+          <path d="M56 101c5 6 11 8 19 8s14-2 19-8" fill="none" stroke="#F4E3D4" stroke-width="6" stroke-linecap="round" opacity=".75"/>
+        </svg>`;
+      }
+
+      function random(min, max) { return Math.random() * (max - min) + min; }
+      function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+      function renderCat(cat) {
+        cat.node.style.transform = `translate3d(${cat.x}px, ${cat.y}px, 0) rotate(${cat.rotation}deg)`;
+      }
+
+      function recycle(cat, fromTop = true) {
+        cat.size = random(58, 118);
+        cat.x = random(-cat.size * .25, window.innerWidth - cat.size * .75);
+        cat.y = fromTop ? random(-cat.size * 1.5, -cat.size * .4) : window.innerHeight + cat.size;
+        cat.vy = fromTop ? random(.1, .6) : random(-.6, -.1);
+        cat.vx = random(-.18, .18);
+        cat.rotation = random(-8, 8);
+        cat.node.style.width = `${cat.size}px`;
+        cat.node.style.height = `${cat.size}px`;
+        renderCat(cat);
+      }
+
+      function addCat(index) {
+        const variant = index % bodyShapes.length;
+        const node = document.createElement('button');
+        node.type = 'button';
+        node.className = 'main-coon';
+        node.setAttribute('aria-label', 'Cute Main Coon cat interaction');
+        node.innerHTML = catSvg(variant, index);
+        layer.appendChild(node);
+        const cat = { node, variant, x: 0, y: 0, size: 80, vx: 0, vy: 0, rotation: 0, seed: random(0, 1000), hit: false };
+        cats.push(cat);
+        recycle(cat, true);
+        if (reduceMotion) {
+          cat.y = random(80, Math.max(100, window.innerHeight - 150));
+          cat.vx = 0;
+          cat.vy = 0;
+        }
+        node.addEventListener('click', event => hitCat(cat, event));
+      }
+
+      function playMeow() {
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContext) return;
+          const audio = window.__mainCoonAudio || (window.__mainCoonAudio = new AudioContext());
+          if (audio.state === 'suspended') audio.resume();
+          const now = audio.currentTime;
+          const oscillator = audio.createOscillator();
+          const gain = audio.createGain();
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(520, now);
+          oscillator.frequency.exponentialRampToValueAtTime(760, now + .12);
+          oscillator.frequency.exponentialRampToValueAtTime(350, now + .38);
+          gain.gain.setValueAtTime(.0001, now);
+          gain.gain.exponentialRampToValueAtTime(.12, now + .025);
+          gain.gain.exponentialRampToValueAtTime(.0001, now + .42);
+          oscillator.connect(gain).connect(audio.destination);
+          oscillator.start(now);
+          oscillator.stop(now + .45);
+        } catch (error) { /* Audio is optional when browser policy blocks it. */ }
+      }
+
+      function burst(x, y) {
+        const particles = ['🐾', '♥', '🐾', '♥', '🐾', '✦', '🐾', '♥'];
+        particles.forEach((symbol, index) => {
+          const particle = document.createElement('span');
+          particle.className = 'cat-particle';
+          particle.textContent = symbol;
+          particle.style.left = `${x}px`;
+          particle.style.top = `${y}px`;
+          particle.style.setProperty('--dx', `${Math.cos(index / particles.length * Math.PI * 2) * random(45, 100)}px`);
+          particle.style.setProperty('--dy', `${Math.sin(index / particles.length * Math.PI * 2) * random(45, 100)}px`);
+          particle.style.setProperty('--rot', `${random(-45, 45)}deg`);
+          particle.style.color = symbol === '♥' ? '#E2231A' : '#008200';
+          document.body.appendChild(particle);
+          window.setTimeout(() => particle.remove(), 900);
+        });
+        if (Math.random() < .28) {
+          const toy = document.createElement('span');
+          toy.className = 'cat-toy';
+          toy.textContent = ['🧶', '🐟', '🐾'][Math.floor(Math.random() * 3)];
+          toy.style.left = `${x}px`;
+          toy.style.top = `${y}px`;
+          toy.style.setProperty('--dx', `${random(-55, 55)}px`);
+          document.body.appendChild(toy);
+          window.setTimeout(() => toy.remove(), 1100);
+        }
+      }
+
+      function hitCat(cat, event) {
+        if (cat.hit) return;
+        cat.hit = true;
+        playMeow();
+        burst(event.clientX, event.clientY);
+        cat.node.classList.add('is-hit');
+        window.setTimeout(() => {
+          cat.node.classList.remove('is-hit');
+          cat.hit = false;
+          recycle(cat, true);
+        }, 650);
+      }
+
+      for (let index = 0; index < count; index += 1) addCat(index);
+
+      let lastFrame = performance.now();
+      let lastScrollY = window.scrollY;
+      let lastScrollAt = 0;
+      let scrollEnergy = 0;
+      let scrollDirection = 1;
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        const delta = currentY - lastScrollY;
+        lastScrollY = currentY;
+        if (Math.abs(delta) > 0) {
+          scrollDirection = delta > 0 ? 1 : -1;
+          scrollEnergy = clamp(scrollEnergy + delta * .12, -14, 14);
+          lastScrollAt = performance.now();
+          cats.forEach(cat => {
+            cat.vy = clamp(cat.vy + delta * .035, -16, 16);
+            cat.y += delta * .45;
+            cat.rotation += delta * .025;
+            renderCat(cat);
+          });
+        }
+      }, { passive: true });
+
+      function animate(now) {
+        const frameScale = Math.min(2, (now - lastFrame) / 16.67);
+        lastFrame = now;
+        const scrolling = now - lastScrollAt < 650 || Math.abs(scrollEnergy) > .2;
+        cats.forEach(cat => {
+          if (reduceMotion && !scrolling) {
+            cat.vx = 0;
+            cat.vy = 0;
+          } else if (scrolling) {
+            cat.vy += scrollEnergy * .035 * frameScale;
+            cat.vy = clamp(cat.vy, -16, 16);
+            cat.vx += Math.sin(now / 900 + cat.seed) * .012 * frameScale;
+            cat.x += cat.vx * frameScale;
+            cat.y += cat.vy * frameScale;
+            cat.rotation += cat.vx * .7 * frameScale + scrollEnergy * .02;
+          } else {
+            cat.vy *= Math.pow(.9, frameScale);
+            cat.x += Math.sin(now / 1000 + cat.seed) * .12 * frameScale;
+            cat.y += Math.sin(now / 700 + cat.seed) * .1 * frameScale;
+            cat.rotation += Math.sin(now / 850 + cat.seed) * .08 * frameScale;
+          }
+          if (scrolling && scrollDirection > 0 && cat.y > window.innerHeight + cat.size) recycle(cat, true);
+          if (scrolling && scrollDirection < 0 && cat.y < -cat.size * 1.5) recycle(cat, false);
+          if (cat.x > window.innerWidth + cat.size) cat.x = -cat.size;
+          if (cat.x < -cat.size) cat.x = window.innerWidth + cat.size;
+          renderCat(cat);
+        });
+        scrollEnergy *= Math.pow(.92, frameScale);
+        window.requestAnimationFrame(animate);
+      }
+      window.requestAnimationFrame(animate);
+    })();
   </script>
 </body>
 </html>
